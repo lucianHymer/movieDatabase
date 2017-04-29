@@ -1,0 +1,27 @@
+.row{
+    margin: 0;
+}
+
+.row2{
+    margin-top: 20px;
+}
+.btn{
+    background: #042CC9;
+}
+
+.col-md-4{
+    padding: 0;
+    margin: 0 auto;
+
+}
+
+
+
+.btn-large{
+    max-width: 150px;
+    width: 100%;
+}
+
+#id_title{
+    width: 100px;
+}

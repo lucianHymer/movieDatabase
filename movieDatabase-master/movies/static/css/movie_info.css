@@ -1,0 +1,25 @@
+.jumbotron{
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.list-group{
+	margin: 0;
+}
+
+.reviews{
+	margin-top: 2%;
+	margin-bottom: 0;
+}
+
+.review-item{
+
+	background-color: #e2e2e2;
+	margin: 2%;
+
+}
+
+.navbar{
+margin:0;
+}
+

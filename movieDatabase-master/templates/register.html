@@ -1,0 +1,43 @@
+{% load staticfiles %}
+  <html>
+        <head>
+            <!-- LINK TO BOOTSTRAP STUFF -->
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+            <link rel="stylesheet" href="{% static 'css/register.css' %}">
+        </head>
+ <body>
+
+               <nav class="navbar navbar-default navbar-static-top">
+                      <div class="container-fluid">
+                        <div class="navbar-header">
+                        </div>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li ><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login </a></li>
+                        </ul>
+                      </div>
+                </nav>
+	<div class ="container">
+
+    		<div class="outer">
+ 			 <div class="middle">
+    			<div class="inner">	       
+				<form action="/register/" method="post" />
+				
+				{% csrf_token %}
+				{{ form.as_p }}
+				<div class="text-center">
+					 <input type="submit" class="btn btn-block button" value="Register" />
+
+					</div>
+					</form> 
+    					<br>
+					<p> Already have an account? <a href="/login">Login</a></p>
+    					</div>
+    				</div>
+    			</div>
+	
+	</div>
+
+</body>
+</html>

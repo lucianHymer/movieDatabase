@@ -1,0 +1,57 @@
+{% load staticfiles %}
+
+<html>
+<head>
+	        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+            <link rel="stylesheet" href="{% static 'css/modify.css' %}">
+
+        </head>
+         <body>
+               <nav class="navbar navbar-default navbar-static-top">
+                      <div class="container-fluid">
+                        <div class="navbar-header">
+                        </div>
+                        <ul class="nav navbar-nav">
+                          <li><a href="/"><span class='glyphicon glyphicon-home'> Home</span></a></li>
+                          <li class="disabled"><a href="#contribute">Contributions</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+
+
+                            
+                            <!--https://www.w3schools.com/bootstrap/bootstrap_navbar.asp-->
+                            {% if is_manager %}
+                                <li ><a href="/manager_page"><span class="glyphicon glyphicon-pencil"></span> Manager Options </a></li>
+                            {% endif %}
+                            <li ><a href="/search"><span class="glyphicon glyphicon-search"></span> Search </a></li>
+                            <li ><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Logout </a></li>
+                        </ul>
+                      </div>
+                </nav>  
+
+
+	<div class="outer">
+	    <div class="middle">
+		<div class="inner">
+<form action="/modify_movie/" method="post" />
+	{% csrf_token %}
+	{% if movies %}
+	    <p></p><select name="movie_id">
+		{% for movie in movies %}
+		<option value="{{movie.id}}">{{movie}}</option> 
+		{% endfor %}
+	    </select></p>
+        <p>
+	    <input class=" btn btn-primary" type="submit" name="operation" value="Remove" />
+	    <input class=" btn btn-primary" type="submit" name="operation" value="Modify" /></p>
+	{% else %}
+	    No movies to modify
+	{% endif %}
+</form> 
+</div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+
+body{
+    margin:0;
+    padding:0;
+}
+
+.container{
+  padding: 0;
+  margin:0;
+}
+
+
+.button{
+  float:none;
+  margin-top: 20px;
+  background-color: #5462F7;
+  color: white;
+}
+
+.button-bar{
+    width: 40%;
+    min-width: 300px;
+    max-width: 500px;
+    margin:0;
+}
+
+.btn-primary{
+    background: #611BBD;
+    color: #ffffff;
+    border:0;
+}
+
+.outer {
+    display: table;
+    position: absolute;
+    margin:0%;
+    height: 80%;
+    width: 100%;
+}
+
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.inner {
+    margin-left: auto;
+    margin-right: auto; 
+    padding: 20px;
+    width: 250px/*whatever width you want*/;
+}

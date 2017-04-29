@@ -1,0 +1,41 @@
+.info{
+    font-size: 18px;
+  
+    font-family: Helvetica;
+}
+
+.btn{
+    background: #042CC9;
+}
+
+.genre_info{
+    justify-content:center;
+    font-size: 18px;
+    font-family: Helvetica;
+}
+
+.tag_info{
+    margin: 0;
+
+    font-family: Helvetica;
+    font-size: 18px;
+}
+
+.content-container{
+    padding: 10px;
+}
+
+.row{
+    margin: 10px;
+}
+
+.genre-tag{
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+hr{
+border-top: 1px solid #8c8b8b;
+    
+}
+

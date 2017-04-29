@@ -1,0 +1,72 @@
+.jumbotron h1 {
+    color: white;
+}
+
+.jumbotron{
+    background-color: #042CC9;
+    margin-top: 0;
+    padding: 20px;
+}
+
+.jumbotron p{
+    color: #E0E0E0;
+}
+
+.navbar{
+    margin-bottom: 0;
+}
+
+a:hover{
+    color: blue;
+}
+
+a:visited{
+    color:blue;
+}
+
+.abt-container{
+    margin:0 auto;
+    background-color: #DEE0E0;
+    margin-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    float: none;
+    width : 75%;
+    border-radius: 3px;
+}
+
+.creat-container{
+    margin:0 auto;
+    margin-top: 10px;
+    width: 75%;
+    float: none;
+    border-radius: 3px;
+    padding-top: 5px;
+    background-color: #DEE0E0;
+}
+
+body{
+    background: url(https://i.imgur.com/L4H1c3s.jpg);
+}
+
+/* https://stackoverflow.com/questions/16625972/change-color-of-bootstrap-navbar-on-hover-link */
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    background-color: #C2C2C2;
+    color: #0C0D0D;
+}
+
+
+.pic-cont{
+    margin: auto;
+    display:block;
+    width: 40%;
+
+}
+
+#caption{
+    margin: auto;
+    
+    float: none
+}
+
+

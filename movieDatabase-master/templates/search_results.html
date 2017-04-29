@@ -1,0 +1,70 @@
+<html>    
+    <head>         
+    <title>Genre Search</title>     
+    <!-- LINK TO BOOTSTRAP STUFF -->
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+            
+        </head>
+         <body>
+               <nav class="navbar navbar-default navbar-static-top">
+                      <div class="container-fluid">
+                        <div class="navbar-header">
+                        </div>
+                        <ul class="nav navbar-nav">
+                          <li><a href="/"><span class='glyphicon glyphicon-home'> Home</span></a></li>
+                          <li class="disabled"><a href="#contribute">Contributions</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+
+
+                            
+                            <!--https://www.w3schools.com/bootstrap/bootstrap_navbar.asp-->
+                            {% if is_manager %}
+                                <li ><a href="/manager_page"><span class="glyphicon glyphicon-pencil"></span> Manager Options </a></li>
+                            {% endif %}
+                            <li ><a href="/search"><span class="glyphicon glyphicon-search"></span> Search </a></li>
+                            <li ><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Logout </a></li>
+                        </ul>
+                      </div>
+                </nav>  
+        <p>You searched for:
+
+		<li>
+		Genre: {% for g in genre %} {{ g.g_name }} {% endfor %} 
+		</li>
+		<li>
+		Tag: {{ tag }} 
+		</li>
+		<li>
+		Crew: {{ crew }}
+		</li>
+		<li>
+		Title: {{ title }}
+		</li>
+
+	</p>
+
+
+
+        {% if movies %}    
+            <p>Found {{ movies|length }} movie{{ movies|pluralize }}.</p>  
+            <table style="width:60%">
+                <tr>
+                    <th>Title</th>
+                    <th>Release year</th>
+                    <th>Duration (min)</th>
+                </tr>  
+                {% for movie in movies %}
+                <tr>
+                    <td><a class="btn-link" href="/movie/?id={{ movie.id }}"> {{movie.title}}</a></td>
+                    <td>{{movie.release_date.year}}</td>
+                    <td>{{movie.duration}}</td>
+                </tr>    
+                {% endfor %}
+            </table>       
+        {% else %}            
+            <p>Nothing matched your search criteria.</p>
+        {% endif %}   
+    </body>     
+</html>  

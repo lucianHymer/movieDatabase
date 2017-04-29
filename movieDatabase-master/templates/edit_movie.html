@@ -1,0 +1,69 @@
+{% load staticfiles %}
+<html>
+<head>
+	        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+            <link rel="stylesheet" href="{% static 'css/edit_movie.css' %}">
+
+        </head>
+        
+         <body>
+               <nav class="navbar navbar-default navbar-static-top">
+                      <div class="container-fluid">
+                        <div class="navbar-header">
+                        </div>
+                        <ul class="nav navbar-nav">
+                          <li><a href="/"><span class='glyphicon glyphicon-home'> Home</span></a></li>
+                          <li class="disabled"><a href="#contribute">Contributions</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+
+
+                            
+                            {% if is_manager %}
+                                <li ><a href="/manager_page"><span class="glyphicon glyphicon-pencil"></span> Manager Options </a></li>
+                            {% endif %}
+                            <!--https://www.w3schools.com/bootstrap/bootstrap_navbar.asp-->
+                            <li ><a href="/search"><span class="glyphicon glyphicon-search"></span> Search </a></li>
+                            <li ><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Logout </a></li>
+                        </ul>
+                      </div>
+                </nav>  
+<div class="content-container">
+{% if movie_id %}
+<form action="/edit_movie/update_id={{ movie_id }}" method="post">
+{% else %}
+<form action="/edit_movie/" method="post">
+{% endif %}
+	{% csrf_token %}
+	   <p class="info"> Title: {{ movie_form.title }} <br>
+	       Description: {{ movie_form.description }} <br>
+	       Release Date: {{ movie_form.release_date }} <br>
+	       Language: {{ movie_form.language }} <br>
+         Duration: {{ movie_form.duration }} <br>
+	       <input type="submit" class=" btn btn-primary" name="action" value="Submit Movie" />
+	  </p>
+	  
+<div class="container-move">  
+	<div class="row">  
+	    <div class="genre_info col-md-3 col-sm-3"> 
+	        <p> Assign Genres: </p>
+    	    {{movie_form.genre}}
+    	</div>
+    	<div class="tag_info col-md-3 col-sm-3">
+    	    <p> Assign Tags: </p>
+    	    {{movie_form.tag}}
+    	</div>
+	 </div>
+	 <hr/>
+	<div class="genre-tag">	
+    <p>Add a genre/tag to the database:</p>
+	    <div class=" "><p>{{ genre_form }} <input type="submit" class=" btn btn-primary" name="action" value="Add Genre" /></p></div>
+	    <div class=" "><p>{{ tag_form }}  <input type="submit" class=" btn btn-primary" name="action" value="Add Tag" /></p></div>
+	</div>
+</div>
+</div>
+</form> 
+
+</body>
+</html>

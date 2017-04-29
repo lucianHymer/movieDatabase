@@ -1,0 +1,94 @@
+{% load staticfiles %}
+
+<html>
+<head>
+<title>Movie Information</title>
+            <!-- LINK TO BOOTSTRAP STUFF -->
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+ 	<link rel="stylesheet" href="{% static 'css/movie_info.css' %}">           
+        </head>
+         <body>
+               <nav class="navbar navbar-default navbar-static-top">
+                      <div class="container-fluid">
+                        <div class="navbar-header">
+                        </div>
+                        <ul class="nav navbar-nav">
+                          <li><a href="/"><span class='glyphicon glyphicon-home'> Home</span></a></li>
+                          <li class="disabled"><a href="#contribute">Contributions</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+
+
+                            
+                            <!--https://www.w3schools.com/bootstrap/bootstrap_navbar.asp-->
+                            {% if is_manager %}
+                                <li ><a href="/modify_movie" target="_blank"><span class="glyphicon glyphicon-pencil"></span> Edit Movies </a></li>
+                                <li ><a href="/modify_crew" target="_blank"><span class="glyphicon glyphicon-pencil"></span> Edit Crews </a></li>
+                            {% endif %}
+                            <li ><a href="/search"><span class="glyphicon glyphicon-search"></span> Search </a></li>
+                            <li ><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Logout </a></li>
+                        </ul>
+                      </div>
+                </nav>
+
+    <div class="jumbotron"><h1 class="display-3"> {{movie.title}}</h1> 
+	<p> ({{movie.release_date}})</p>
+	<hr class="my-4">
+	<p class = "lead">{{movie.description}}</p>
+	</div>
+	
+	<ul class="list-group">
+	   	<li class="list-group-item">GENRES: {% for g in genre %}
+        	        {{g.g_name}},  
+                	{% endfor %} ...
+		</li>
+		<li class="list-group-item">TAGS: {% for t in tags %}
+			{{ t.t_name }}, 
+			{% endfor%} ...
+		</li>
+		<li class="list-group-item">CREW: {% for c in crew %}
+			{{ c.crew_first_name }} {{ c.crew_last_name}} - {{ c.role }}, 
+			{% endfor %} ...
+		</li> 
+		<li class="list-group-item">LANGUAGE: {{movie.language}}</li>
+		<li class="list-group-item">DESCRIPTION: {{movie.description}}</li>
+		<li class="list-group-item">RUNTIME: {{movie.duration}} min.</li>
+	</ul>
+	<br>
+	<div class="reviews">
+	<h3>REVIEWS</h3>
+		 {% for r in reviews %}
+			<div class="review-item">
+				<p>Rating: <em>{{ r.rating }}</em></p>
+				<p>User: {{ r.user}}</p>
+				<blockquote>
+				<p>{{ r.description }}<p>
+				</blockquote>
+			</div>
+		{% endfor %}
+	</div>
+
+
+	<form action="/add_tag/" method="post" />
+		{% csrf_token %}
+		<h3> Add Tag: </h3> 
+		{{ tag_form.t_name }}
+		<input type="hidden" value="{{ movie.id }}" name = "movie_id">
+	<input type="submit" class="btn " value="Leave Tag" />
+	</form>
+	
+	
+	<form action="/add_review/" method="post" />
+		{% csrf_token %}
+	<hr class="my-4">
+    	<h3>Add Review:</h3> 
+	{{ review_form.movie.as_hidden }}
+    	{{ review_form.user.as_hidden }}
+	<h4> Rating: {{ review_form.rating }} </h4>
+	<h4> Description: {{ review_form.description }} </h4>
+	<input type="submit" class="btn " value="Leave Review" />
+    </form>
+
+</body>
+</html>

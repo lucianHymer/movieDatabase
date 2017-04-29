@@ -1,0 +1,560 @@
+-- MySQL dump 10.13  Distrib 5.7.18, for Linux (x86_64)
+--
+-- Host: localhost    Database: movies
+-- ------------------------------------------------------
+-- Server version	5.7.18
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `auth_group`
+--
+
+DROP TABLE IF EXISTS `auth_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(80) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_group`
+--
+
+LOCK TABLES `auth_group` WRITE;
+/*!40000 ALTER TABLE `auth_group` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_group` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_group_permissions`
+--
+
+DROP TABLE IF EXISTS `auth_group_permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_group_permissions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_group_permissions_group_id_permission_id_0cd325b0_uniq` (`group_id`,`permission_id`),
+  KEY `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` (`permission_id`),
+  CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
+  CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_group_permissions`
+--
+
+LOCK TABLES `auth_group_permissions` WRITE;
+/*!40000 ALTER TABLE `auth_group_permissions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_group_permissions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_permission`
+--
+
+DROP TABLE IF EXISTS `auth_permission`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_permission` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `content_type_id` int(11) NOT NULL,
+  `codename` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`),
+  CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_permission`
+--
+
+LOCK TABLES `auth_permission` WRITE;
+/*!40000 ALTER TABLE `auth_permission` DISABLE KEYS */;
+INSERT INTO `auth_permission` VALUES (1,'Can add log entry',1,'add_logentry'),(2,'Can change log entry',1,'change_logentry'),(3,'Can delete log entry',1,'delete_logentry'),(4,'Can add group',2,'add_group'),(5,'Can change group',2,'change_group'),(6,'Can delete group',2,'delete_group'),(7,'Can add user',3,'add_user'),(8,'Can change user',3,'change_user'),(9,'Can delete user',3,'delete_user'),(10,'Can add permission',4,'add_permission'),(11,'Can change permission',4,'change_permission'),(12,'Can delete permission',4,'delete_permission'),(13,'Can add content type',5,'add_contenttype'),(14,'Can change content type',5,'change_contenttype'),(15,'Can delete content type',5,'delete_contenttype'),(16,'Can add session',6,'add_session'),(17,'Can change session',6,'change_session'),(18,'Can delete session',6,'delete_session'),(19,'Can add crew',7,'add_crew'),(20,'Can change crew',7,'change_crew'),(21,'Can delete crew',7,'delete_crew'),(22,'Can add review',8,'add_review'),(23,'Can change review',8,'change_review'),(24,'Can delete review',8,'delete_review'),(25,'Can add user',9,'add_user'),(26,'Can change user',9,'change_user'),(27,'Can delete user',9,'delete_user'),(28,'Can add tag',10,'add_tag'),(29,'Can change tag',10,'change_tag'),(30,'Can delete tag',10,'delete_tag'),(31,'Can add movie',11,'add_movie'),(32,'Can change movie',11,'change_movie'),(33,'Can delete movie',11,'delete_movie'),(34,'Can add genre',12,'add_genre'),(35,'Can change genre',12,'change_genre'),(36,'Can delete genre',12,'delete_genre');
+/*!40000 ALTER TABLE `auth_permission` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_user`
+--
+
+DROP TABLE IF EXISTS `auth_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `password` varchar(128) NOT NULL,
+  `last_login` datetime(6) DEFAULT NULL,
+  `is_superuser` tinyint(1) NOT NULL,
+  `username` varchar(150) NOT NULL,
+  `first_name` varchar(30) NOT NULL,
+  `last_name` varchar(30) NOT NULL,
+  `email` varchar(254) NOT NULL,
+  `is_staff` tinyint(1) NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  `date_joined` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_user`
+--
+
+LOCK TABLES `auth_user` WRITE;
+/*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
+INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$36000$MZB98ORTWxBb$lboxzE2U8B6Xsku4ARWMdl1ThRVBSAzhD/x/0zrW1rI=','2017-04-21 23:50:20.003663',1,'admin','','','admin@movies.com',1,1,'2017-04-21 23:49:43.090573');
+/*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_user_groups`
+--
+
+DROP TABLE IF EXISTS `auth_user_groups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_user_groups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_user_groups_user_id_group_id_94350c0c_uniq` (`user_id`,`group_id`),
+  KEY `auth_user_groups_group_id_97559544_fk_auth_group_id` (`group_id`),
+  CONSTRAINT `auth_user_groups_group_id_97559544_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
+  CONSTRAINT `auth_user_groups_user_id_6a12ed8b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_user_groups`
+--
+
+LOCK TABLES `auth_user_groups` WRITE;
+/*!40000 ALTER TABLE `auth_user_groups` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_user_groups` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_user_user_permissions`
+--
+
+DROP TABLE IF EXISTS `auth_user_user_permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_user_user_permissions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_user_user_permissions_user_id_permission_id_14a6b632_uniq` (`user_id`,`permission_id`),
+  KEY `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` (`permission_id`),
+  CONSTRAINT `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
+  CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_user_user_permissions`
+--
+
+LOCK TABLES `auth_user_user_permissions` WRITE;
+/*!40000 ALTER TABLE `auth_user_user_permissions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_user_user_permissions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_admin_log`
+--
+
+DROP TABLE IF EXISTS `django_admin_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_admin_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `action_time` datetime(6) NOT NULL,
+  `object_id` longtext,
+  `object_repr` varchar(200) NOT NULL,
+  `action_flag` smallint(5) unsigned NOT NULL,
+  `change_message` longtext NOT NULL,
+  `content_type_id` int(11) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `django_admin_log_content_type_id_c4bce8eb_fk_django_co` (`content_type_id`),
+  KEY `django_admin_log_user_id_c564eba6_fk_auth_user_id` (`user_id`),
+  CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
+  CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_admin_log`
+--
+
+LOCK TABLES `django_admin_log` WRITE;
+/*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_content_type`
+--
+
+DROP TABLE IF EXISTS `django_content_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_content_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `app_label` varchar(100) NOT NULL,
+  `model` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_content_type`
+--
+
+LOCK TABLES `django_content_type` WRITE;
+/*!40000 ALTER TABLE `django_content_type` DISABLE KEYS */;
+INSERT INTO `django_content_type` VALUES (1,'admin','logentry'),(2,'auth','group'),(4,'auth','permission'),(3,'auth','user'),(5,'contenttypes','contenttype'),(7,'movies','crew'),(12,'movies','genre'),(11,'movies','movie'),(8,'movies','review'),(10,'movies','tag'),(9,'movies','user'),(6,'sessions','session');
+/*!40000 ALTER TABLE `django_content_type` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_migrations`
+--
+
+DROP TABLE IF EXISTS `django_migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_migrations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `app` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `applied` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_migrations`
+--
+
+LOCK TABLES `django_migrations` WRITE;
+/*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
+INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2017-04-21 23:48:08.195677'),(2,'auth','0001_initial','2017-04-21 23:48:11.212293'),(3,'admin','0001_initial','2017-04-21 23:48:11.924744'),(4,'admin','0002_logentry_remove_auto_add','2017-04-21 23:48:11.989431'),(5,'contenttypes','0002_remove_content_type_name','2017-04-21 23:48:12.410575'),(6,'auth','0002_alter_permission_name_max_length','2017-04-21 23:48:12.471288'),(7,'auth','0003_alter_user_email_max_length','2017-04-21 23:48:12.535338'),(8,'auth','0004_alter_user_username_opts','2017-04-21 23:48:12.557152'),(9,'auth','0005_alter_user_last_login_null','2017-04-21 23:48:12.767173'),(10,'auth','0006_require_contenttypes_0002','2017-04-21 23:48:12.777519'),(11,'auth','0007_alter_validators_add_error_messages','2017-04-21 23:48:12.799948'),(12,'auth','0008_alter_user_username_max_length','2017-04-21 23:48:12.947961'),(13,'movies','0001_initial','2017-04-21 23:48:13.181227'),(14,'movies','0002_auto_20170401_1549','2017-04-21 23:48:14.431547'),(15,'movies','0003_auto_20170401_1823','2017-04-21 23:48:14.635937'),(16,'movies','0004_auto_20170401_1845','2017-04-21 23:48:14.850721'),(17,'movies','0005_auto_20170401_1930','2017-04-21 23:48:15.331702'),(18,'movies','0006_auto_20170401_1947','2017-04-21 23:48:16.243295'),(19,'movies','0007_auto_20170405_1503','2017-04-21 23:48:17.218742'),(20,'movies','0008_tag','2017-04-21 23:48:17.360661'),(21,'movies','0009_movie_has_tag','2017-04-21 23:48:18.208140'),(22,'movies','0010_movie_has_tag_t_id','2017-04-21 23:48:19.004770'),(23,'movies','0011_crew','2017-04-21 23:48:19.913730'),(24,'movies','0012_auto_20170406_2349','2017-04-21 23:48:20.120958'),(25,'movies','0013_review','2017-04-21 23:48:21.768612'),(26,'movies','0014_user_sex','2017-04-21 23:48:22.038627'),(27,'movies','0015_auto_20170414_1627','2017-04-21 23:48:22.424137'),(28,'movies','0016_auto_20170414_1735','2017-04-21 23:48:22.595641'),(29,'movies','0017_auto_20170415_1308','2017-04-21 23:48:22.688122'),(30,'movies','0017_auto_20170415_1301','2017-04-21 23:48:24.642014'),(31,'movies','0018_merge_20170415_1345','2017-04-21 23:48:24.654450'),(32,'movies','0019_auto_20170415_1837','2017-04-21 23:48:25.954309'),(33,'movies','0020_auto_20170416_1829','2017-04-21 23:48:26.577924'),(34,'movies','0020_auto_20170416_1827','2017-04-21 23:48:27.224392'),(35,'movies','0021_merge_20170416_1909','2017-04-21 23:48:27.244677'),(36,'movies','0020_auto_20170416_1843','2017-04-21 23:48:27.903194'),(37,'movies','0021_merge_20170416_1855','2017-04-21 23:48:27.923454'),(38,'movies','0022_merge_20170416_1931','2017-04-21 23:48:27.938275'),(39,'movies','0023_auto_20170421_1534','2017-04-21 23:48:29.136142'),(40,'movies','0024_auto_20170421_1544','2017-04-21 23:48:30.154430'),(41,'movies','0025_auto_20170421_1942','2017-04-21 23:48:30.500843'),(42,'sessions','0001_initial','2017-04-21 23:48:30.716425');
+/*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_session`
+--
+
+DROP TABLE IF EXISTS `django_session`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_session` (
+  `session_key` varchar(40) NOT NULL,
+  `session_data` longtext NOT NULL,
+  `expire_date` datetime(6) NOT NULL,
+  PRIMARY KEY (`session_key`),
+  KEY `django_session_expire_date_a5c62663` (`expire_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_session`
+--
+
+LOCK TABLES `django_session` WRITE;
+/*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
+INSERT INTO `django_session` VALUES ('jvzhp7frfrfun7f0mngex96s5d25jc80','YzI4MjIwYTIyNjFkYmUxODAxYjUwODI0Zjg1MDJjNzUyMTk1YTMyZTp7Il9zZXNzaW9uX2V4cGlyeSI6MCwibWFuYWdlciI6dHJ1ZSwiX2F1dGhfdXNlcl9pZCI6IjEiLCJ1c2VySUQiOjEsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiZW1haWwiOiJsdWNpYW4uaHltZXJAdWt5LmVkdSIsIl9hdXRoX3VzZXJfaGFzaCI6ImE4ZDUyNWVlNDlhZTY5NDk1MGJjYzlmY2Q4YjUyOTYwNWU5ZmE1ZWMiLCJ1c2VybmFtZSI6Ikx1Y2lhbiBIeW1lciJ9','2017-05-05 23:50:47.145064');
+/*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `movies_crew`
+--
+
+DROP TABLE IF EXISTS `movies_crew`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `movies_crew` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `crew_first_name` varchar(15) NOT NULL,
+  `crew_last_name` varchar(15) NOT NULL,
+  `role` varchar(15) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `movies_crew`
+--
+
+LOCK TABLES `movies_crew` WRITE;
+/*!40000 ALTER TABLE `movies_crew` DISABLE KEYS */;
+INSERT INTO `movies_crew` VALUES (1,'Kasey','Koen','Director'),(2,'Kesha','Kohut','Director'),(3,'Josette','John','Director'),(4,'Jake','Jamerson','Director'),(5,'Sammie','Schier','Director'),(6,'Joanne','Jacks','Actor'),(7,'Joana','Juarbe','Actor'),(8,'Chet','Canaday','Actor'),(9,'Virgen','Vannatter','Actor'),(10,'Genevieve','Godwin','Actor'),(11,'Harriett','Huguley','Producer'),(12,'Esperanza','Eddins','Producer'),(13,'Norine','Niemiec','Producer'),(14,'Tomika','Twilley','Producer'),(15,'Long','Lowrey','Producer'),(16,'Pura','Poage','Soundman'),(17,'Tandra','Tunnell','Soundman'),(18,'Tommy','Tower','Soundman'),(19,'Reyes','Rabalais','Soundman'),(20,'Dixie','Demko','Soundman'),(21,'Cordia','Curto','Cameraman'),(22,'Jodee','Jason','Cameraman'),(23,'Tiffany','Tassone','Cameraman'),(24,'Talia','Truex','Cameraman'),(25,'Rima','Rhymer','Cameraman'),(26,'Phung','Parks','Creator'),(27,'Sang','Somers','Creator'),(28,'Lillian','Lupi','Creator'),(29,'Cari','Capone','Creator'),(30,'Kaycee','Khalaf','Creator');
+/*!40000 ALTER TABLE `movies_crew` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `movies_crew_m_id`
+--
+
+DROP TABLE IF EXISTS `movies_crew_m_id`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `movies_crew_m_id` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `crew_id` int(11) NOT NULL,
+  `movie_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `movies_crew_m_id_crew_id_movie_id_1e844384_uniq` (`crew_id`,`movie_id`),
+  KEY `movies_crew_m_id_movie_id_104df743_fk_movies_movie_id` (`movie_id`),
+  CONSTRAINT `movies_crew_m_id_crew_id_eda49c87_fk_movies_crew_id` FOREIGN KEY (`crew_id`) REFERENCES `movies_crew` (`id`),
+  CONSTRAINT `movies_crew_m_id_movie_id_104df743_fk_movies_movie_id` FOREIGN KEY (`movie_id`) REFERENCES `movies_movie` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `movies_crew_m_id`
+--
+
+LOCK TABLES `movies_crew_m_id` WRITE;
+/*!40000 ALTER TABLE `movies_crew_m_id` DISABLE KEYS */;
+INSERT INTO `movies_crew_m_id` VALUES (31,1,1),(32,2,33),(33,3,42),(34,3,43),(35,3,44),(39,8,46),(40,8,47),(36,8,54),(38,8,55),(37,8,56),(41,9,1),(44,9,33),(42,9,34),(43,9,35),(45,10,33),(46,10,34),(47,10,35),(48,10,41),(49,18,54),(50,18,55),(51,18,56),(52,18,57),(53,18,58),(54,18,59),(85,29,1),(86,29,33),(87,29,34),(88,29,35),(89,29,36),(90,29,37),(91,29,38),(92,29,39),(93,29,40),(94,29,41),(95,29,42),(96,29,43),(97,29,44),(98,29,45),(99,29,46),(100,29,47),(101,29,48),(102,29,49),(103,29,50),(104,29,51),(105,29,52),(106,29,53),(107,29,54),(108,29,55),(109,29,56),(110,29,57),(111,29,58),(112,29,59),(113,29,60),(114,29,61),(115,29,62);
+/*!40000 ALTER TABLE `movies_crew_m_id` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `movies_genre`
+--
+
+DROP TABLE IF EXISTS `movies_genre`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `movies_genre` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `g_name` varchar(30) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `movies_genre`
+--
+
+LOCK TABLES `movies_genre` WRITE;
+/*!40000 ALTER TABLE `movies_genre` DISABLE KEYS */;
+INSERT INTO `movies_genre` VALUES (1,'Horror'),(2,'Western'),(3,'Thriller'),(4,'Romance'),(5,'Comedy'),(6,'Animation'),(7,'Action'),(8,'War'),(9,'Adventure'),(10,'Drama'),(11,'Documentary'),(12,'History'),(13,'Science'),(14,'Fiction'),(15,'Mystery'),(16,'Fantasy'),(17,'Biography'),(18,'Anime'),(19,'Indie'),(20,'Chick'),(21,'Flick'),(22,'Superhero'),(23,'Musical'),(24,'Satire'),(25,'Family'),(26,'War'),(27,'Sport'),(28,'Crime'),(29,'Film-Noir'),(30,'Political'),(31,'Urban'),(32,'Philisophical');
+/*!40000 ALTER TABLE `movies_genre` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `movies_movie`
+--
+
+DROP TABLE IF EXISTS `movies_movie`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `movies_movie` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(30) NOT NULL,
+  `description` varchar(250) NOT NULL,
+  `release_date` date NOT NULL,
+  `language` varchar(15) NOT NULL,
+  `duration` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `movies_movie`
+--
+
+LOCK TABLES `movies_movie` WRITE;
+/*!40000 ALTER TABLE `movies_movie` DISABLE KEYS */;
+INSERT INTO `movies_movie` VALUES (1,'Logan','In the near future, a weary Logan cares for an ailing Professor X somewhere on the Mexican border. However, Logan\'s attempts to hide from the world and his legacy are upended when a young mutant arrives, pursued by dark forces.','2017-03-03','English',141),(33,'Sausage Party','A sausage strives to discover the truth about his existence.','2016-08-12','English',89),(34,'Star Wars: The Force Awakens','Three decades after the defeat of the Galactic Empire, a new threat arises. The First Order attempts to rule the galaxy and only a ragtag group of heroes can stop them, along with the help of the Resistance.','2015-12-18','English',136),(35,'Split','Three girls are kidnapped by a man with a diagnosed 23 distinct personalities, they must try to escape before the apparent emergence of a frightful new 24th.','2017-01-20','English',117),(36,'Beauty and the Beast','An adaptation of the fairy tale about a monstrous-looking prince and a young woman who fall in love.','2017-03-17','English',129),(37,'The Fate and the Furious','When a mysterious woman seduces Dom into the world of terrorism and a betrayal of those closest to him, the crew face trials that will test them as never before.','2017-04-14','English',136),(38,'Fifty Shades Darker','While Christian wrestles with his inner demons, Anastasia must confront the anger and envy of the women who came before her.','2017-02-10','English',118),(39,'Power Rangers','A group of high-school students, who are infused with unique superpowers, harness their abilities in order to save the world.','2017-03-24','English',124),(40,'Rogue One: A Star Wars Story','The Rebel Alliance makes a risky move to steal the plans for the Death Star, setting up the epic saga to follow.','2016-12-16','English',133),(41,'Finding Dory','The friendly but forgetful blue tang fish, Dory, begins a search for her long-lost parents, and everyone learns a few things about the real meaning of family along the way.','2016-06-27','English',97),(42,'Captain America: Civil War','Political interference in the Avengers\' activities causes a rift between former allies Captain America and Iron Man.','2016-05-06','English',147),(43,'Deadpool','A fast-talking mercenary with a morbid sense of humor is subjected to a rogue experiment that leaves him with accelerated healing powers and a quest for revenge.','2016-02-12','English',108),(44,'Zootopia','In a city of anthropomorphic animals, a rookie bunny cop and a cynical con artist fox must work together to uncover a conspiracy.','2016-03-04','English',108),(45,'Suicide Squad','A secret government agency recruits some of the most dangerous incarcerated super-villains to form a defensive task force. Their first mission: save the world from the apocalypse.','2016-08-05','English',123),(46,'Doctor Strange','While on a journey of physical and spiritual healing, a brilliant neurosurgeon is drawn into the world of the mystic arts.','2016-11-04','English',115),(47,'Fantastic Beasts','The adventures of writer Newt Scamander in New York\'s secret community of witches and wizards seventy years before Harry Potter reads his book in school.','2016-03-04','English',133),(48,'Moana','In Ancient Polynesia, when a terrible curse incurred by the Demigod Maui reaches an impetuous Chieftain\'s daughter\'s island, she answers the Ocean\'s call to seek out the Demigod to set things right.','2016-12-23','English',107),(49,'Star Trek Beyond','The USS Enterprise crew explores the furthest reaches of uncharted space, where they encounter a new ruthless enemy who puts them and everything the Federation stands for to the test.','2016-03-04','English',122),(50,'X-Men Apocolypse','After the re-emergence of the world\'s first mutant, world-destroyer Apocalypse, the X-Men must unite to defeat his extinction level plan.','2016-05-27','English',144),(51,'La La Land','A jazz pianist falls for an aspiring actress in Los Angeles.','2016-12-25','English',128),(52,'Ghostbusters','Following a ghost invasion of Manhattan, paranormal enthusiasts Erin Gilbert and Abby Yates, nuclear engineer Jillian Holtzmann, and subway worker Patty Tolan band together to stop the otherworldly threat.','2016-07-15','English',116),(53,'Jurassic World','A new theme park, built on the original site of Jurassic Park, creates a genetically modified hybrid dinosaur, which escapes containment and goes on a killing spree.','2015-06-12','English',124),(54,'Furious 7','Deckard Shaw seeks revenge against Dominic Toretto and his family for his comatose brother.','2015-04-03','English',137),(55,'Minions','Minions Stuart, Kevin and Bob are recruited by Scarlet Overkill, a super-villain who, alongside her inventor husband Herb, hatches a plot to take over the world.','2015-07-10','English',91),(56,'The Martian','An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive.','2015-10-02','English',144),(57,'Mad Max: Fury Road','A woman rebels against a tyrannical ruler in postapocalyptic Australia in search for her home-land with the help of a group of female prisoners, a psychotic worshipper, and a drifter named Max.','2015-05-15','English',120),(58,'American Sniper','Navy S.E.A.L. sniper Chris Kyle\'s pinpoint accuracy saves countless lives on the battlefield and turns him into a legend. Back home to his wife and kids after four tours of duty, however, Chris finds that it is the war he can\'t leave behind.','2016-03-04','English',133),(59,'Guardians of the Galaxy','A group of intergalactic criminals are forced to work together to stop a fanatical warrior from taking control of the universe.','2014-08-01','English',121),(60,'22 Jump Street','After making their way through high school (twice), big changes are in store for officers Schmidt and Jenko when they go deep undercover at a local college.','2014-06-13','English',112),(61,'Interstellar','A team of explorers travel through a wormhole in space in an attempt to ensure humanity\'s survival.','2014-11-07','English',169),(62,'Big Hero 6','The special bond that develops between plus-sized inflatable robot Baymax, and prodigy Hiro Hamada, who team up with a group of friends to form a band of high-tech heroes.','2014-11-07','English',162);
+/*!40000 ALTER TABLE `movies_movie` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `movies_movie_genre`
+--
+
+DROP TABLE IF EXISTS `movies_movie_genre`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `movies_movie_genre` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `movie_id` int(11) NOT NULL,
+  `genre_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `movies_movie_genre_movie_id_genre_id_73e1db58_uniq` (`movie_id`,`genre_id`),
+  KEY `movies_movie_genre_genre_id_d9d93fd9_fk_movies_genre_id` (`genre_id`),
+  CONSTRAINT `movies_movie_genre_genre_id_d9d93fd9_fk_movies_genre_id` FOREIGN KEY (`genre_id`) REFERENCES `movies_genre` (`id`),
+  CONSTRAINT `movies_movie_genre_movie_id_15526873_fk_movies_movie_id` FOREIGN KEY (`movie_id`) REFERENCES `movies_movie` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `movies_movie_genre`
+--
+
+LOCK TABLES `movies_movie_genre` WRITE;
+/*!40000 ALTER TABLE `movies_movie_genre` DISABLE KEYS */;
+INSERT INTO `movies_movie_genre` VALUES (60,1,6),(44,1,17),(45,33,17),(54,34,8),(49,35,6),(32,35,8),(38,35,28),(35,35,29),(37,37,4),(43,38,29),(53,40,1),(33,40,23),(52,43,5),(56,43,23),(63,44,1),(39,45,4),(58,45,18),(46,46,29),(50,48,19),(59,49,29),(40,50,4),(42,50,5),(31,50,18),(34,50,30),(48,53,1),(57,53,6),(55,54,22),(41,56,25),(47,58,9),(61,60,4),(62,60,12),(36,61,29),(51,62,27);
+/*!40000 ALTER TABLE `movies_movie_genre` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `movies_movie_tag`
+--
+
+DROP TABLE IF EXISTS `movies_movie_tag`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `movies_movie_tag` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `movie_id` int(11) NOT NULL,
+  `tag_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `movies_movie_tag_movie_id_tag_id_fe927fe4_uniq` (`movie_id`,`tag_id`),
+  KEY `movies_movie_tag_tag_id_c7b4c32e_fk_movies_tag_id` (`tag_id`),
+  CONSTRAINT `movies_movie_tag_movie_id_287c30af_fk_movies_movie_id` FOREIGN KEY (`movie_id`) REFERENCES `movies_movie` (`id`),
+  CONSTRAINT `movies_movie_tag_tag_id_c7b4c32e_fk_movies_tag_id` FOREIGN KEY (`tag_id`) REFERENCES `movies_tag` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `movies_movie_tag`
+--
+
+LOCK TABLES `movies_movie_tag` WRITE;
+/*!40000 ALTER TABLE `movies_movie_tag` DISABLE KEYS */;
+INSERT INTO `movies_movie_tag` VALUES (63,1,16),(64,1,20),(68,33,4),(67,33,19),(69,33,21),(65,33,24),(66,33,28),(83,44,6),(79,44,8),(81,44,10),(80,44,16),(82,44,18),(84,48,8),(85,48,20),(71,54,2),(72,54,5),(74,54,12),(70,54,16),(73,54,26),(75,54,30),(78,58,23),(76,58,29),(77,58,30),(61,60,4),(62,60,20),(86,61,1),(88,61,5),(89,61,9),(90,61,23),(87,61,29);
+/*!40000 ALTER TABLE `movies_movie_tag` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `movies_review`
+--
+
+DROP TABLE IF EXISTS `movies_review`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `movies_review` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(200) NOT NULL,
+  `rating` int(11) NOT NULL,
+  `movie_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `movies_review_movie_id_3f8bd27f_fk_movies_movie_id` (`movie_id`),
+  KEY `movies_review_user_id_4e16f57e_fk_movies_user_id` (`user_id`),
+  CONSTRAINT `movies_review_movie_id_3f8bd27f_fk_movies_movie_id` FOREIGN KEY (`movie_id`) REFERENCES `movies_movie` (`id`),
+  CONSTRAINT `movies_review_user_id_4e16f57e_fk_movies_user_id` FOREIGN KEY (`user_id`) REFERENCES `movies_user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `movies_review`
+--
+
+LOCK TABLES `movies_review` WRITE;
+/*!40000 ALTER TABLE `movies_review` DISABLE KEYS */;
+INSERT INTO `movies_review` VALUES (1,'This movie was fantastic, I wouldn\'t recommend it to my friends. I liked the filmography.',5,61,4),(2,'This movie was terrible, I wouldn\'t recommend it to my friends. I liked the lights.',10,55,7),(3,'This movie was bad, I would recommend it to my friends. I liked the actors.',10,46,15),(4,'This movie was bad, I would recommend it to my friends. I liked the actors.',1,35,4),(5,'This movie was bad, I would recommend it to my friends. I liked the plot.',4,54,28),(6,'This movie was bad, I would recommend it to my friends. I liked the lights.',2,56,27),(7,'This movie was good, I wouldn\'t recommend it to my friends. I liked the lights.',8,49,18),(8,'This movie was good, I would recommend it to my friends. I liked the filmography.',1,49,9),(9,'This movie was bad, I wouldn\'t recommend it to my friends. I liked the filmography.',2,40,6),(10,'This movie was bad, I would recommend it to my friends. I liked the plot.',4,49,12),(11,'This movie was alright, I would recommend it to my friends. I liked the actors.',3,58,11),(12,'This movie was alright, I wouldn\'t recommend it to my friends. I liked the filmography.',6,48,15),(13,'This movie was bad, I wouldn\'t recommend it to my friends. I liked the lights.',5,39,27),(14,'This movie was alright, I wouldn\'t recommend it to my friends. I liked the lights.',6,46,8),(15,'This movie was terrible, I would recommend it to my friends. I liked the actors.',1,56,27),(16,'This movie was good, I would recommend it to my friends. I liked the plot.',2,55,2),(17,'This movie was alright, I would recommend it to my friends. I liked the actors.',10,56,1),(18,'This movie was terrible, I wouldn\'t recommend it to my friends. I liked the lights.',7,40,9),(19,'This movie was good, I wouldn\'t recommend it to my friends. I liked the actors.',6,1,30),(20,'This movie was alright, I would recommend it to my friends. I liked the lights.',10,33,8),(21,'This movie was bad, I wouldn\'t recommend it to my friends. I liked the plot.',10,33,20),(22,'This movie was alright, I wouldn\'t recommend it to my friends. I liked the filmography.',6,55,18),(23,'This movie was good, I wouldn\'t recommend it to my friends. I liked the lights.',7,58,28),(24,'This movie was alright, I wouldn\'t recommend it to my friends. I liked the lights.',8,41,17),(25,'This movie was terrible, I wouldn\'t recommend it to my friends. I liked the plot.',9,62,2),(26,'This movie was fantastic, I wouldn\'t recommend it to my friends. I liked the actors.',8,36,8),(27,'This movie was bad, I wouldn\'t recommend it to my friends. I liked the filmography.',10,52,24),(28,'This movie was good, I wouldn\'t recommend it to my friends. I liked the filmography.',9,59,6),(29,'This movie was fantastic, I wouldn\'t recommend it to my friends. I liked the plot.',7,46,13),(30,'This movie was fantastic, I wouldn\'t recommend it to my friends. I liked the filmography.',4,43,29);
+/*!40000 ALTER TABLE `movies_review` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `movies_tag`
+--
+
+DROP TABLE IF EXISTS `movies_tag`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `movies_tag` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `t_name` varchar(15) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `t_name` (`t_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `movies_tag`
+--
+
+LOCK TABLES `movies_tag` WRITE;
+/*!40000 ALTER TABLE `movies_tag` DISABLE KEYS */;
+INSERT INTO `movies_tag` VALUES (23,'Alien'),(16,'Animal'),(8,'Baby'),(20,'Beer'),(27,'Boxing'),(7,'Car'),(3,'Claws'),(17,'Clothing'),(4,'Clown'),(19,'Coffee'),(26,'Crab'),(30,'Dance'),(12,'Fight'),(6,'Funny'),(10,'Gamble'),(22,'Gun'),(21,'Liquor'),(11,'Magic'),(9,'Ocean'),(18,'Phone'),(14,'Pizza'),(15,'Plane'),(25,'Queen'),(2,'Sausage'),(5,'Scary'),(13,'Shoes'),(31,'Slime'),(1,'Space'),(24,'Teacher'),(29,'Time'),(28,'Wilderness');
+/*!40000 ALTER TABLE `movies_tag` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `movies_user`
+--
+
+DROP TABLE IF EXISTS `movies_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `movies_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(15) NOT NULL,
+  `middle_name` varchar(15) NOT NULL,
+  `last_name` varchar(15) NOT NULL,
+  `date_of_birth` date NOT NULL,
+  `manager` tinyint(1) NOT NULL,
+  `sex` varchar(1) NOT NULL,
+  `email` varchar(30) DEFAULT NULL,
+  `password` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `movies_user`
+--
+
+LOCK TABLES `movies_user` WRITE;
+/*!40000 ALTER TABLE `movies_user` DISABLE KEYS */;
+INSERT INTO `movies_user` VALUES (1,'Lucian','Blake','Hymer','1994-08-11',1,'M','lucian.hymer@uky.edu','bla'),(2,'Murray','Leta','Mayon','1995-04-27',0,'M','murray.mayon@movies.com','jicmjmas'),(3,'Dewitt','Eden','Demming','1965-06-23',0,'M','dewitt.demming@movies.com','dgjnnqqpl'),(4,'Hank','Chassidy','Hawkin','1990-12-10',0,'M','hank.hawkin@movies.com','cxqwkknaq'),(5,'Christopher','Sheryll','Chubb','2010-09-21',0,'M','christopher.chubb@movies.com','opuixvcgjml'),(6,'Lindsay','Caitlyn','Larin','1976-10-02',0,'M','lindsay.larin@movies.com','vgxzqsbvevgz'),(7,'Johnathon','Luciano','Javier','1977-01-13',0,'M','johnathon.javier@movies.com','pymzaltgvs'),(8,'Jules','Gregory','Jeffcoat','1965-01-15',0,'M','jules.jeffcoat@movies.com','jhpjpvkmj'),(9,'Waylon','Royal','Wittig','1951-04-12',0,'M','waylon.wittig@movies.com','qesdfjghzggx'),(10,'Morton','Chrissy','Mumford','1965-03-08',0,'M','morton.mumford@movies.com','fgemgmogpd'),(11,'Carmine','Georgine','Coulter','2000-09-13',0,'M','carmine.coulter@movies.com','jrkbqzoomkjx'),(12,'Salvador','Silvia','Seo','1979-12-17',0,'M','salvador.seo@movies.com','ouuzjfipeucl'),(13,'Aubrey','Simon','Appel','1996-06-06',0,'M','aubrey.appel@movies.com','peridehcov'),(14,'Jc','August','Jordan','1995-11-16',0,'M','jc.jordan@movies.com','wwbypuwckbjx'),(15,'Ismael','Larraine','Ing','1967-05-15',0,'M','ismael.ing@movies.com','kqucekmkrfxz'),(16,'Eldridge','Evonne','Ellard','1953-02-17',0,'M','eldridge.ellard@movies.com','bcjeinvsbdyj'),(17,'Kisha','Eunice','Koontz','1984-04-21',0,'F','kisha.koontz@movies.com','xgakyyujjf'),(18,'Zonia','Jaquelyn','Zulauf','1971-12-21',0,'F','zonia.zulauf@movies.com','zqczbune'),(19,'Gertrud','Kandis','Gruver','1965-07-20',0,'F','gertrud.gruver@movies.com','vlkbbzvsjlb'),(20,'Pia','Virgie','Payer','1984-03-20',0,'F','pia.payer@movies.com','tgdocuqvvj'),(21,'Shauna','Estelle','Sarles','2000-07-28',0,'F','shauna.sarles@movies.com','ubzcwyxe'),(22,'Marvel','Sharen','Mcloud','1999-11-09',0,'F','marvel.mcloud@movies.com','kvxgbjggkgio'),(23,'Argelia','Deanna','Allende','1996-08-07',0,'F','argelia.allende@movies.com','zppxavif'),(24,'Lupita','Lauralee','Lamay','1954-09-23',0,'F','lupita.lamay@movies.com','rpajiiqc'),(25,'Fermina','Deidre','Fairman','1963-05-21',0,'F','fermina.fairman@movies.com','ioiuhxpd'),(26,'Giovanna','Bambi','Garbett','1989-09-04',0,'F','giovanna.garbett@movies.com','pvrhllqkb'),(27,'Amal','Arvilla','Alden','1974-01-11',0,'F','amal.alden@movies.com','aogbvmheaj'),(28,'Mariela','Starla','Merideth','1973-04-23',0,'F','mariela.merideth@movies.com','pkwxirlixrbs'),(29,'Krysta','Glen','Krings','1974-09-26',0,'F','krysta.krings@movies.com','subzwrhvrck'),(30,'Genesis','Fawn','Gover','2009-03-02',0,'F','genesis.gover@movies.com','wnqihjsa'),(31,'Barrie','Tesha','Benware','1951-09-21',0,'F','barrie.benware@movies.com','khssnkeknh');
+/*!40000 ALTER TABLE `movies_user` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2017-04-21 19:51:54

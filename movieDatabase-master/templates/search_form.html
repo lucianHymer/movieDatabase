@@ -1,0 +1,86 @@
+{% load staticfiles %}
+<html>
+<head>
+        <title>Search</title>
+<!-- LINK TO BOOTSTRAP STUFF -->
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'css/search.css' %}">
+
+        </head>
+         <body>
+               <nav class="navbar navbar-default navbar-static-top">
+                      <div class="container-fluid">
+                        <div class="navbar-header">
+                        </div>
+                        <ul class="nav navbar-nav">
+                          <li><a href="/"><span class='glyphicon glyphicon-home'> Home</span></a></li>
+                          <li class="disabled"><a href="#contribute">Contributions</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+
+
+                            
+                            {% if is_manager %}
+                                <li ><a href="/manager_page"><span class="glyphicon glyphicon-pencil"></span> Manager Options </a></li>
+                            {% endif %}
+                            <!--https://www.w3schools.com/bootstrap/bootstrap_navbar.asp-->
+                            <li ><a href="/search"><span class="glyphicon glyphicon-search"></span> Search </a></li>
+                            <li ><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Logout </a></li>
+                        </ul>
+                      </div>
+                </nav>
+        {% if errors %}
+                <ul style = "color: red;">
+                        {% for error in errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                </ul>
+        {% endif %}
+        <form action="/search/" method="get">	
+		<div class="move-container">
+		    <div class="row">
+    	    <div class="col-md-4">
+    	        <strong>Title Search:</strong>
+    		    <input type="text" size="45" name="title_q">
+            </div>
+            <div class="col-md-4">
+    	    	<strong>Crew Search:</strong>
+		<br>
+    	    	<input type="text" name="crew_q" placeholder="First name">
+    	    	<input type="text" name="crew_q2" placeholder='Last name'>
+    		</div>
+    		
+    		<div class="col-md-4">
+                <strong>Tag Search:</strong>
+		<br>
+                <input type="text" name="tag_q">
+                 		     
+
+    		</div>
+    		</div>
+    		<div class="row2">
+		        <div class="col-md-2 justify-content-center">
+    		<strong>Select genre(s): </strong>
+    		<br>
+    		{% for genre in genres %}
+    			<input type="checkbox" name='g_id' value={{genre.id}}> {{genre.g_name}}
+			<br>
+    		{% endfor %}
+    	    </div>
+            </form>
+        	</div>
+
+            <strong>Sort results by (ascending): </strong>
+            <br>
+            <div class="row3">
+                <div class="col-md-2 justify-content-center">
+                      <input type="radio" name="sort_by" value="title" checked="checked">Title<br>
+                      <input type="radio" name="sort_by" value="runtime">Duration<br>
+                      <input type="radio" name="sort_by" value="year">Release year<br>
+                </div>
+            </div>
+    		    <input type="submit" class="btn btn-primary btn-large" name="Search">	
+        </div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+{% load staticfiles %}
+
+<html>
+	    <head>
+	        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+            <link rel="stylesheet" href="{% static 'css/edit_movie.css' %}">
+
+        </head>
+         <body>
+               <nav class="navbar navbar-default navbar-static-top">
+                      <div class="container-fluid">
+                        <div class="navbar-header">
+                        </div>
+                        <ul class="nav navbar-nav">
+                          <li><a href="/"><span class='glyphicon glyphicon-home'> Home</span></a></li>
+                          <li class="disabled"><a href="#contribute">Contributions</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+
+
+                            
+{% if is_manager %}
+                                <li ><a href="/manager_page"><span class="glyphicon glyphicon-pencil"></span> Manager Options </a></li>
+                            {% endif %}
+                            <!--https://www.w3schools.com/bootstrap/bootstrap_navbar.asp-->
+                            <li ><a href="/search"><span class="glyphicon glyphicon-search"></span> Search </a></li>
+                            <li ><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Logout </a></li>
+                        </ul>
+                      </div>
+                </nav>  
+
+<div class="content-container">
+
+{% if crew_id %}
+<form action="/edit_crew/update_id={{ crew_id }}" method="post">
+{% else %}
+
+<form action="/edit_crew/" method="post">
+{% endif %}
+	{% csrf_token %}
+	<p class="info">
+	    Crew First Name: {{ crew_form.crew_first_name }}
+	    Crew Last Name: {{ crew_form.crew_last_name }}
+	    Crew Role: {{ crew_form.role }}
+	<input type="submit" class=" btn btn-primary" name="action" value="Submit Crew Member" />
+    </p>
+    <div class="tag_info">
+    <p> Assign Movie: </p>
+    {{crew_form.m_id}}
+    </div>
+    
+</form> 
+</div>
+
+</body>
+</html>

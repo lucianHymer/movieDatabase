@@ -1,0 +1,85 @@
+body{
+    margin:0;
+    padding:0;
+}
+
+.container{
+  padding: 0;
+  margin:0;
+}
+
+.button{
+  float:none;
+  margin-top: 20px;
+  background-color: #5462F7;
+  color: white;
+}
+
+.outer {
+    display: table;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.inner {
+    margin-left: auto;
+    margin-right: auto; 
+    border-style: solid;
+    border-color:#D9D9D9;
+    border-radius: 2px;
+    border-width: 1px;
+    padding: 40px 30px 20px 30px;
+    width: 250px/*whatever width you want*/;
+}
+
+label{
+    font-family: Helvetica;
+
+    color: black;
+}
+    
+
+#id_email, #id#id_first_name,#id_middle_name,#id_last_name,#id_email,#id_password,#id_date_of_birth,#id_sex{
+    float : none;
+}
+
+#id_password{
+    float: none;
+}
+
+body{
+    background-color: #FAFAFA;
+}
+
+.outer1 {
+    display: table;
+    position: absolute;
+    height: 0;
+    width: 100%;
+    margin-top: 81%;
+}
+/* change how the margin works */
+
+.inner1 {
+    margin-left: auto;
+    margin-right: auto; 
+    border-style: solid;
+    border-color:#D9D9D9;
+    border-radius: 2px;
+    border-width: 1px;
+    padding: 20px 20px 20px 20px;
+    width: 250px/*whatever width you want*/;
+}
+
+form{
+    position:relative;
+}
+
+
+
