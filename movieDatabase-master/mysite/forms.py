@@ -23,6 +23,7 @@ class RegisterForm(ModelForm):
 			raise forms.ValidationError(
 				"password and confirm password does not match"
 				)
+
 	class Meta:
 		model = User
 		widgets = {

@@ -118,7 +118,7 @@ def log_in(request):
 						    del request.session['manager']
 						    request.session.modified = True
 						# Cookies will expire when browser closes
-						request.session.set_expiry(0)
+						request.session.set_expiry(300)
 #						return render(request, home_page(request), {'is_manager': is_manager(request)})
 						return home_page(request)
 		else:
